@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="col mt-5">
+    <button type="button" class="btn btn-primary" (click)="goToCreate()">
+      Add new
+    </button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Mail</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of [1, 2, 3]">
+        <td>Robinson Klever Ortega Mafla</td>
+        <td>+593983213769</td>
+        <td>mail@email.com</td>
+        <td class="btn-group d-none d-sm-block" role="group">
+          <button class="btn btn-outline-success" (click)="goToView(item)">
+            View
+          </button>
+          <button class="btn btn-outline-primary" (click)="goToEdit(item)">
+            Edit
+          </button>
+          <button class="btn btn-outline-danger" (click)="deleteItem(item)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
