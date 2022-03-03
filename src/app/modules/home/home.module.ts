@@ -8,9 +8,16 @@ import { EditComponent } from './pages/edit/edit.component';
 import { ListComponent } from './pages/list/list.component';
 import { HeroComponent } from './pages/hero/hero.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ListComponent, AddComponent, EditComponent, HeroComponent, DetailComponent],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  declarations: [
+    ListComponent,
+    AddComponent,
+    EditComponent,
+    HeroComponent,
+    DetailComponent,
+  ],
+  imports: [CommonModule, HomeRoutingModule, SharedModule, ReactiveFormsModule],
 })
 export class HomeModule {}
