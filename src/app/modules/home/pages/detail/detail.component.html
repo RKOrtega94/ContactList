@@ -14,17 +14,17 @@
             /></a>
           </div>
           <div class="col-6 card-title align-self-center mb-0">
-            <h5>Emma A. Main</h5>
-            <p class="m-0">Graphics Designer</p>
+            <h5>{{ contact.name }}</h5>
+            <p class="m-0">{{ contact.job }}</p>
           </div>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <i class="fa fa-envelope float-right"></i>Email :
-            <a href="#">PaulGoyette@gmail.com</a>
+            <a href="#">{{ contact.email }}</a>
           </li>
           <li class="list-group-item">
-            <i class="fa fa-phone float-right"></i>Phone : 000 123-456
+            <i class="fa fa-phone float-right"></i>Phone : {{ contact.phone }}
           </li>
         </ul>
         <div class="card-footer">

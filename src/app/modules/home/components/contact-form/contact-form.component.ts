@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Contact } from 'src/app/models/contact';
 
 @Component({
   selector: 'app-contact-form',
@@ -8,11 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./contact-form.component.css'],
 })
 export class ContactFormComponent implements OnInit {
+  isUpdate: boolean = false;
   contactForm = new FormGroup({});
 
-  constructor(private router: Router, private fb: FormBuilder) {}
+  constructor(private router: Router, private fb: FormBuilder) {
+    this.router.url.includes('edit')
+      ? (this.isUpdate = true)
+      : (this.isUpdate = false);
+    console.log(this.isUpdate);
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.initForm();
+  }
+
+  onSave(): void {
+    console.log(this.contactForm.value);
+  }
 
   private initForm(): void {
     this.contactForm = this.fb.group({

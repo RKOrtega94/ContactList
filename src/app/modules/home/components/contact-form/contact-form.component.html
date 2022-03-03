@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="contactForm" (ngSubmit)="onSave()">
   <div class="card m-b-30">
     <div class="card-body row">
       <div class="col-4">
@@ -20,6 +20,7 @@
             id="name"
             type="text"
             class="form-control"
+            formControlName="name"
             placeholder="Enter your full name"
           />
         </div>
@@ -29,6 +30,7 @@
             type="text"
             class="form-control"
             id="job"
+            formControlName="job"
             placeholder="Enter your job"
           />
         </div>
@@ -42,6 +44,7 @@
             id="mail"
             type="email"
             class="form-control"
+            formControlName="email"
             placeholder="Enter your email"
           />
         </div>
@@ -53,6 +56,7 @@
             id="phone"
             type="phone"
             class="form-control"
+            formControlName="phone"
             placeholder="Enter your phone number"
           />
         </div>
@@ -61,7 +65,7 @@
     <div class="card-footer">
       <div class="row justify-content-center">
         <div class="float-right btn-group btn-group-sm">
-          <button class="btn btn-outline-success">
+          <button class="btn btn-outline-success" type="submit">
             <i class="fa fa-edit fa-lg"></i>Save
           </button>
           <button class="btn btn-outline-danger">

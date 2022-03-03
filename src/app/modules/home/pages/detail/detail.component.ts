@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Contact } from 'src/app/models/contact';
 
 @Component({
   selector: 'app-detail',
@@ -8,11 +9,16 @@ import { Router } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   value: any;
+  contact!: Contact;
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state;
-    console.log(this.value);
+    this.contact = this.value?.value;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (typeof this.contact === 'undefined') {
+      this.router.navigate(['list']);
+    }
+  }
 }

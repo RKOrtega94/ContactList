@@ -14,18 +14,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of [1, 2, 3]">
-        <td>Robinson Klever Ortega Mafla</td>
-        <td>+593983213769</td>
-        <td>mail@email.com</td>
+      <tr *ngFor="let data of contactList">
+        <td>{{ data.name }}</td>
+        <td>{{ data.phone }}</td>
+        <td>{{ data.email }}</td>
         <td class="btn-group d-none d-sm-block" role="group">
-          <button class="btn btn-outline-success" (click)="goToView(item)">
+          <button class="btn btn-outline-success" (click)="goToView(data)">
             View
           </button>
-          <button class="btn btn-outline-primary" (click)="goToEdit(item)">
+          <button class="btn btn-outline-primary" (click)="goToEdit(data.id)">
             Edit
           </button>
-          <button class="btn btn-outline-danger" (click)="deleteItem(item)">
+          <button class="btn btn-outline-danger" (click)="deleteItem(data.id)">
             Delete
           </button>
         </td>

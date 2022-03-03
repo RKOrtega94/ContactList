@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { Contact } from 'src/app/models/contact';
 
 @Component({
   selector: 'app-list',
@@ -8,6 +9,29 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class ListComponent implements OnInit {
   navigationExtras: NavigationExtras = { state: { value: null } };
+  contactList: Contact[] = [
+    {
+      id: '1',
+      name: 'John Doe',
+      job: 'Software Engineer',
+      email: 'email@email.com',
+      phone: '1234567890',
+    },
+    {
+      id: '2',
+      name: 'Jane Doe',
+      job: 'Software Engineer',
+      email: 'email2@email.com',
+      phone: '1234567890',
+    },
+    {
+      id: '3',
+      name: 'John Doe',
+      job: 'Software Engineer',
+      email: 'test@email.com',
+      phone: '1234567890',
+    },
+  ];
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
