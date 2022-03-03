@@ -8,18 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./add.component.css'],
 })
 export class AddComponent implements OnInit {
-  contactForm = new FormGroup({});
-
-  constructor(private router: Router, private fb: FormBuilder) {}
+  
+  constructor() {}
 
   ngOnInit(): void {}
 
-  private initForm(): void {
-    this.contactForm = this.fb.group({
-      name: ['', [Validators.required]],
-      job: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required]],
-    });
-  }
+  
 }

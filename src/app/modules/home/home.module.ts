@@ -9,6 +9,7 @@ import { ListComponent } from './pages/list/list.component';
 import { HeroComponent } from './pages/hero/hero.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     EditComponent,
     HeroComponent,
     DetailComponent,
+    ContactFormComponent,
   ],
   imports: [CommonModule, HomeRoutingModule, SharedModule, ReactiveFormsModule],
 })
