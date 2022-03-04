@@ -3,6 +3,7 @@ import {
   addDoc,
   collection,
   collectionData,
+  deleteDoc,
   doc,
   docData,
   Firestore,
@@ -39,5 +40,10 @@ export class ContactService {
     console.log(id);
     const contactRef = doc(this.firestore, `contacts/${id}`);
     return docData(contactRef, { idField: 'id' }) as Observable<Contact>;
+  }
+
+  deleteContact(id: string): Promise<any> {
+    const contactRef = doc(this.firestore, `contacts/${id}`);
+    return deleteDoc(contactRef);
   }
 }

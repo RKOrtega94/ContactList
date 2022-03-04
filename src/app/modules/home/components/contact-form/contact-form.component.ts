@@ -11,6 +11,7 @@ import { ContactService } from '../../services/contact.service';
 })
 export class ContactFormComponent implements OnInit {
   value: any;
+  id: string;
   contact!: Contact;
   isUpdate: boolean = false;
   contactForm = new FormGroup({});
@@ -22,9 +23,10 @@ export class ContactFormComponent implements OnInit {
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state;
-    if (this.value)
+    this.id = this.value.value;
+    if (this.id)
       this.contactService
-        .getContactByID(this.value.value)
+        .getContactByID(this.id)
         .subscribe((contact) => {
           this.contact = contact;
           this.contactForm.patchValue(this.contact);
