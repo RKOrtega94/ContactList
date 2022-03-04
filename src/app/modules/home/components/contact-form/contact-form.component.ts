@@ -23,7 +23,7 @@ export class ContactFormComponent implements OnInit {
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state;
-    this.id = this.value.value;
+    this.id = this.value?.value;
     if (this.id)
       this.contactService
         .getContactByID(this.id)
