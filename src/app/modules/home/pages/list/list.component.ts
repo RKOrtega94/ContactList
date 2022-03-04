@@ -34,8 +34,8 @@ export class ListComponent implements OnInit {
   }
 
   deleteItem(item: any): void {
-    console.log(item.id);
-    this.contactService.deleteContact(item.id).then(() => {
+    console.log(item);
+    this.contactService.deleteContact(item).then(() => {
       this.contactService.getContacts().subscribe((contacts) => {
         this.contacts = contacts;
       });
