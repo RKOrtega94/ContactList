@@ -3,7 +3,10 @@ import {
   addDoc,
   collection,
   collectionData,
+  doc,
+  docData,
   Firestore,
+  setDoc,
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Contact } from 'src/app/models/contact';
@@ -12,18 +15,29 @@ import { Contact } from 'src/app/models/contact';
   providedIn: 'root',
 })
 export class ContactService {
-  contactRef;
+  contactsRef;
   constructor(private firestore: Firestore) {
-    this.contactRef = collection(this.firestore, 'contacts');
+    this.contactsRef = collection(this.firestore, 'contacts');
   }
 
   getContacts(): Observable<Contact[]> {
-    return collectionData(this.contactRef, { idField: 'id' }) as Observable<
+    return collectionData(this.contactsRef, { idField: 'id' }) as Observable<
       Contact[]
     >;
   }
 
   addContact(contact: Contact): Promise<any> {
-    return addDoc(this.contactRef, contact);
+    return addDoc(this.contactsRef, contact);
+  }
+
+  updateContact(id: string, contact: Contact): Promise<any> {
+    const contactRef = doc(this.firestore, `contacts/${id}`);
+    return setDoc(contactRef, contact);
+  }
+
+  getContactByID(id: string): Observable<Contact> {
+    console.log(id);
+    const contactRef = doc(this.firestore, `contacts/${id}`);
+    return docData(contactRef, { idField: 'id' }) as Observable<Contact>;
   }
 }

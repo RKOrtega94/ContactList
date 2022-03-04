@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact';
@@ -10,6 +10,8 @@ import { ContactService } from '../../services/contact.service';
   styleUrls: ['./contact-form.component.css'],
 })
 export class ContactFormComponent implements OnInit {
+  value: any;
+  contact!: Contact;
   isUpdate: boolean = false;
   contactForm = new FormGroup({});
 
@@ -18,19 +20,30 @@ export class ContactFormComponent implements OnInit {
     private fb: FormBuilder,
     private contactService: ContactService
   ) {
+    const navigation = this.router.getCurrentNavigation();
+    this.value = navigation?.extras?.state;
+    if (this.value)
+      this.contactService
+        .getContactByID(this.value.value)
+        .subscribe((contact) => {
+          this.contact = contact;
+          this.contactForm.patchValue(this.contact);
+        });
     this.router.url.includes('edit')
       ? (this.isUpdate = true)
       : (this.isUpdate = false);
-    console.log(this.isUpdate);
   }
 
   ngOnInit(): void {
     this.initForm();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
   onSave(): void {
-    console.log(this.contactForm.value);
-    this.contactService.addContact(this.contactForm.value);
+    this.isUpdate ? this.updateContact() : this.createContact();
   }
 
   private initForm(): void {
@@ -40,5 +53,15 @@ export class ContactFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
     });
+  }
+
+  createContact(): void {
+    this.contactService
+      .addContact(this.contactForm.value)
+      .then(() => this.router.navigate(['list']));
+  }
+
+  updateContact(): void {
+    this.contactService.updateContact(this.value.value, this.contactForm.value);
   }
 }
