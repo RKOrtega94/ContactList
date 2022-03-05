@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-detail',
@@ -10,7 +11,8 @@ import { Contact } from 'src/app/models/contact';
 export class DetailComponent implements OnInit {
   value: any;
   contact!: Contact;
-  constructor(private router: Router) {
+  navigationExtras: NavigationExtras = { state: { value: null } };
+  constructor(private router: Router, private contactService: ContactService) {
     const navigation = this.router.getCurrentNavigation();
     this.value = navigation?.extras?.state;
     this.contact = this.value?.value;
@@ -20,5 +22,19 @@ export class DetailComponent implements OnInit {
     if (typeof this.contact === 'undefined') {
       this.router.navigate(['list']);
     }
+  }
+
+  goToEdit(item: any): void {
+    this.navigationExtras.state!['value'] = item;
+    this.router.navigate(['edit'], this.navigationExtras);
+  }
+
+  deleteItem(item: any): void {
+    console.log(item);
+    this.contactService.deleteContact(item).then(() => {
+      this.contactService.getContacts().subscribe((contacts) => {
+        this.router.navigate(['list']);
+      });
+    });
   }
 }

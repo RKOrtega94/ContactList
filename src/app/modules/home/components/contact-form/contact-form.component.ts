@@ -25,12 +25,10 @@ export class ContactFormComponent implements OnInit {
     this.value = navigation?.extras?.state;
     this.id = this.value?.value;
     if (this.id)
-      this.contactService
-        .getContactByID(this.id)
-        .subscribe((contact) => {
-          this.contact = contact;
-          this.contactForm.patchValue(this.contact);
-        });
+      this.contactService.getContactByID(this.id).subscribe((contact) => {
+        this.contact = contact;
+        this.contactForm.patchValue(this.contact);
+      });
     this.router.url.includes('edit')
       ? (this.isUpdate = true)
       : (this.isUpdate = false);
@@ -65,5 +63,9 @@ export class ContactFormComponent implements OnInit {
 
   updateContact(): void {
     this.contactService.updateContact(this.value.value, this.contactForm.value);
+  }
+
+  goToList(): void {
+    this.router.navigate(['list']);
   }
 }
